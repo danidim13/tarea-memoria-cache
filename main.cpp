@@ -1,8 +1,7 @@
-#ifndef MAIN
+#ifndef MAIN_H
 #include <iostream>
 #include <string>
-#define MAIN
-#endif
+#define MAIN_H
 
 using namespace std;
 
@@ -38,3 +37,7 @@ bool checkArg(int argc, char* argv[] ){
 	}
 	
 }
+
+
+
+#endif
