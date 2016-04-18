@@ -1,25 +1,39 @@
-#ifndef MEMORYCACHE_H
-#define MEMORYCACHE_H
+#ifndef CACHEMEMORY_H
+#define CACHEMEMORY_H
 
-#include "CacheMemory.cpp"
+//#include "CacheMemory.cpp"
 
 class CacheMemory{
 	public:
 		CacheMemory();
-		CacheMemory(int, int, int);
+		CacheMemory(int v_assoc, int v_mem_size, int v_block_size);
 		~CacheMemory();
-		void set_block_size(int);
-		void set_assoc(int);
-		void set_mem_size(int);
+		void set_block_size(const int&);
+		void set_assoc(const int&);
+		void set_mem_size(const int&);
+		const void print();
 
+		typedef unsigned long dir_t;
+		bool read(const dir_t&);
+		bool write(const dir_t&);
 	private:
 		int block_size;
 		int assoc;
 		int mem_size;
 
+		int tag_size;
+		int index_size;
+		int offset_size;
+		int block_num;
+		int set_num;
 
-		bool check_pow2(int);
-}
+		const static int DIR_SIZE = 32;
+
+		void initialize();
+		const bool check_pow2(const int&);
+		void set_tag();
+		bool fetch(const dir_t&);
+};
 
 
 

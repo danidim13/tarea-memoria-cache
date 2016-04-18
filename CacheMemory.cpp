@@ -1,33 +1,79 @@
-#include <sstream>
+#ifndef CACHEMEMORY_CPP
+#define CACHEMEMORY_CPP
 
-CacheMemory::CacheMemory(int assoc, int mem_size, int bloq_size){
+#include <sstream>
+#include <cmath>
+#include <iostream>
+#include "CacheMemory.h"
+
+CacheMemory::CacheMemory(int v_assoc, int v_mem_size, int v_block_size){
 	//df
+	set_assoc(v_assoc);
+	set_mem_size(v_mem_size);
+	set_block_size(v_block_size);
+	initialize();
+}
+
+CacheMemory::CacheMemory(){
+	block_size = 0;
+        assoc = 0;
+        mem_size = 0;
+
+        tag_size = 0;
+        index_size = 0;
+        offset_size = 0;
+        block_num = 0;
+        set_num = 0;
 
 }
-void CacheMemory::set_block_size(int val){
+CacheMemory::~CacheMemory(){
+}
+
+void CacheMemory::initialize(){
+	// Cantidad de bloques y sets
+	block_num = mem_size/block_size;
+	set_num = block_num/assoc;
+
+	// Se determinan los bits del offset
+	offset_size = (int) log2(block_num);
+	index_size = (int) log2(set_num);
+	tag_size = DIR_SIZE - (offset_size + index_size);
+}
+
+void CacheMemory::set_block_size(const int &val){
 	if (check_pow2(val))
 		block_size = val;
 	else 
-		std::cout << "Error, block_size not valid" << std::endl;
+		std::cerr << "Error, block_size not valid" << std::endl;
 }
 
-void CacheMemory::set_mem_size(int val){
+void CacheMemory::set_mem_size(const int &val){
 	if (check_pow2(val))
 		mem_size = val;
 	else 
-		std::cout << "Error, mem_size not valid" << std::endl;
+		std::cerr << "Error, mem_size not valid" << std::endl;
 }
 
-void CacheMemory::set_assoc(int val){
+void CacheMemory::set_assoc(const int &val){
 	if (check_pow2(val))
 		assoc = val;
 	else 
-		std::cout << "Error, assoc not valid" << std::endl;
+		std::cerr << "Error, assoc not valid" << std::endl;
 }
 
-bool CacheMemory::check_pow2(int val){
+const bool CacheMemory::check_pow2(const int &val){
 	if(val){
-		return (x & (x-1)) == 0;
+		return (val & (val-1)) == 0;
 	}
 	return false;
 }
+const void CacheMemory::print(){
+	std::cout << "Memoria cache de "
+		  << mem_size << " B, "
+		  << assoc << "-way associative, con bloques de "
+		  << block_size << " bytes.\n\n\t"
+		  << tag_size << " bits de tag, " << index_size << " bits de index." << std::endl;
+}
+
+
+#endif
