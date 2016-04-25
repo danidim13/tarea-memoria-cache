@@ -1,9 +1,7 @@
 #ifndef CACHEMEMORY_H
 #define CACHEMEMORY_H
 
-//#include "CacheMemory.cpp"
-#include <map>
-// #include "CacheBlock.h"
+#include "CacheMemory.cpp"
 
 class CacheMemory{
 	public:
