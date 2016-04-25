@@ -1,10 +1,7 @@
-#ifndef CACHEMEMORY_CPP
-#define CACHEMEMORY_CPP
-
+#include "CacheMemory.h"
 #include <sstream>
 #include <cmath>
 #include <iostream>
-#include "CacheMemory.h"
 
 CacheMemory::CacheMemory(int v_assoc, int v_mem_size, int v_block_size){
 	//df
@@ -76,4 +73,3 @@ const void CacheMemory::print(){
 }
 
 
-#endif
