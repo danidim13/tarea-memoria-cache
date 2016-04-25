@@ -8,19 +8,17 @@ using namespace std;
 
 
 void welcome();
-bool checkArg(int, char*[]);
+bool checkArg(int, char*[], int[]);
 
 int main(int argc, char* argv[]){
 
 	welcome();
 	
-	if(!checkArg(argc, argv))
+	// Revision de argumentos, si hay errores el programa termina y retorna 1
+	int parametros[3];
+	if(!checkArg(argc, argv, parametros))
 		return 1;
 	
-	int parametros[3];
-	parametros[0]= std::stoi(argv[1]);
-	parametros[1]= std::stoi(argv[2]);
-	parametros[2]= std::stoi(argv[3]);
 	CacheMemory memoria(parametros[0], parametros[1], parametros[2]);
 	memoria.print();
 
@@ -38,13 +36,16 @@ void welcome(){
 	
 }
 
-bool checkArg(int argc, char* argv[] ){
+bool checkArg(int argc, char* argv[], int parametros[]){
 	if(argc != 4){
 		cerr << "Error de argumentos, uso:\n"
 			 << "\t " << argv[0] << " <asociatividad> <tamano del cache> <tamano del bloque>"
 			 << endl;
 		return false;
 	}
+	parametros[0]= std::stoi(argv[1]);
+	parametros[1]= std::stoi(argv[2]);
+	parametros[2]= std::stoi(argv[3]);
 	return true;
 	
 }
