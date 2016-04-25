@@ -1,12 +1,11 @@
 #ifndef CACHEMEMORY_H
 #define CACHEMEMORY_H
 
-#include "CacheMemory.cpp"
 
 class CacheMemory{
 	public:
 		CacheMemory();
-		CacheMemory(int v_assoc, int v_mem_size, int v_block_size);
+		CacheMemory(const int &v_assoc, const int &v_mem_size, const int &v_block_size);
 		~CacheMemory();
 		void set_block_size(const int&);
 		void set_assoc(const int&);

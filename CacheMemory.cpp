@@ -3,14 +3,6 @@
 #include <cmath>
 #include <iostream>
 
-CacheMemory::CacheMemory(int v_assoc, int v_mem_size, int v_block_size){
-	//df
-	set_assoc(v_assoc);
-	set_mem_size(v_mem_size);
-	set_block_size(v_block_size);
-	initialize();
-}
-
 CacheMemory::CacheMemory(){
 	block_size = 0;
         assoc = 0;
@@ -23,6 +15,15 @@ CacheMemory::CacheMemory(){
         set_num = 0;
 
 }
+
+CacheMemory::CacheMemory(const int &v_assoc, const int &v_mem_size, const int &v_block_size){
+	//df
+	set_assoc(v_assoc);
+	set_mem_size(v_mem_size);
+	set_block_size(v_block_size);
+	initialize();
+}
+
 CacheMemory::~CacheMemory(){
 }
 
