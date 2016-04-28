@@ -17,11 +17,13 @@ class CacheMemory{
 
 
 		/* La estrutura de datos para las posiciones de memoria del cache sera
-		   un std::map, tal que el key es el index y el dato contiene el bloque
-		   incluido en esto el tag, bit de dirty, bit de valid, y la 
-		   Asi, el tipo de datos sera un std::map< dir_t, CacheBlock >
+		   un arreglo de los sets, tal que el index del array es el mismo que el del set
+		   Luego cada set consiste en n cantidad de bloques de cache, cada uno incluye
+		   el respectivo tag, bit de dirty, bit de valid,
+		   Asi, el tipo de datos sera un std::array< CacheSet >
+		
 		*/ 
-		// std::map< dir_t, CacheBlock > cache_struct;
+		// std::array< CacheSet >
 
 		bool read(const dir_t&);
 		bool write(const dir_t&);
