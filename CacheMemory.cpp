@@ -41,22 +41,28 @@ void CacheMemory::initialize(){
 void CacheMemory::set_block_size(const int &val){
 	if (check_pow2(val))
 		block_size = val;
-	else 
+	else {
 		std::cerr << "Error, block_size not valid" << std::endl;
+		block_size = 1;
+	}
 }
 
 void CacheMemory::set_mem_size(const int &val){
 	if (check_pow2(val))
 		mem_size = val;
-	else 
+	else{ 
 		std::cerr << "Error, mem_size not valid" << std::endl;
+		mem_size = 1;
+	}
 }
 
 void CacheMemory::set_assoc(const int &val){
 	if (check_pow2(val))
 		assoc = val;
-	else 
+	else{ 
 		std::cerr << "Error, assoc not valid" << std::endl;
+		assoc = 1;
+	}
 }
 
 const bool CacheMemory::check_pow2(const int &val){

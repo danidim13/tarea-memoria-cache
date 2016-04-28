@@ -12,7 +12,19 @@ class CacheMemory{
 		void set_mem_size(const int&);
 		const void print();
 
-		typedef unsigned long dir_t;
+		// Tipo de datos para las direcciones de memoria.
+		typedef unsigned long dir_t; 
+
+
+		/* La estrutura de datos para las posiciones de memoria del cache sera
+		   un arreglo de los sets, tal que el index del array es el mismo que el del set
+		   Luego cada set consiste en n cantidad de bloques de cache, cada uno incluye
+		   el respectivo tag, bit de dirty, bit de valid,
+		   Asi, el tipo de datos sera un std::array< CacheSet >
+		
+		*/ 
+		// std::array< CacheSet >
+
 		bool read(const dir_t&);
 		bool write(const dir_t&);
 	private:
@@ -26,6 +38,7 @@ class CacheMemory{
 		int block_num;
 		int set_num;
 
+		// Tamano de las direcciones de memoria
 		const static int DIR_SIZE = 32;
 
 		void initialize();
