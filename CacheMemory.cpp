@@ -13,7 +13,6 @@ CacheMemory::CacheMemory(){
         offset_size = 0;
         block_num = 0;
         set_num = 0;
-
 }
 
 CacheMemory::CacheMemory(const int &v_assoc, const int &v_mem_size, const int &v_block_size){
@@ -36,6 +35,12 @@ void CacheMemory::initialize(){
 	offset_size = (int) log2(block_num);
 	index_size = (int) log2(set_num);
 	tag_size = DIR_SIZE - (offset_size + index_size);
+
+	for(int im = 0; im < index_size; im++){
+    my_mask <<= 1;
+    my_mask |= 1;
+  }
+
 }
 
 void CacheMemory::set_block_size(const int &val){
@@ -50,7 +55,7 @@ void CacheMemory::set_block_size(const int &val){
 void CacheMemory::set_mem_size(const int &val){
 	if (check_pow2(val))
 		mem_size = val;
-	else{ 
+	else{
 		std::cerr << "Error, mem_size not valid" << std::endl;
 		mem_size = 1;
 	}
@@ -59,7 +64,7 @@ void CacheMemory::set_mem_size(const int &val){
 void CacheMemory::set_assoc(const int &val){
 	if (check_pow2(val))
 		assoc = val;
-	else{ 
+	else{
 		std::cerr << "Error, assoc not valid" << std::endl;
 		assoc = 1;
 	}
@@ -79,4 +84,8 @@ const void CacheMemory::print(){
 		  << tag_size << " bits de tag, " << index_size << " bits de index." << std::endl;
 }
 
-
+void CacheMemory::split(dir_t &address){
+	tag_and_index = address >> offset_size;
+	index = tag_and_index & my_mask;
+	tag = tag_and_index >> index_size;
+}
