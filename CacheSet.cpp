@@ -10,7 +10,7 @@ CacheSet::CacheSet(const int assoc):block_num(assoc), fifo(0){
 }
 
 CacheSet::~CacheSet(){
-	delete blocks;
+	delete[] blocks;
 }
 
 Block* CacheSet::find(dir_t tag){

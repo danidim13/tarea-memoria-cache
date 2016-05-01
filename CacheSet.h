@@ -1,9 +1,10 @@
 #ifndef CACHESET_H
 #define CACHESET_H
+#include <iostream>
 
 struct Block{
 	Block():m_valid(false),m_tag(0){};
-
+	~Block(){};
 	//bool m_dirty;
 	bool m_valid;
 	unsigned long m_tag;
