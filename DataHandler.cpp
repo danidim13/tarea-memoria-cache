@@ -1,3 +1,6 @@
+#ifndef DATAHANDLER_CPP
+#define DATAHANDLER_CPP
+
 #include "DataHandler.h"
 #include <iostream>
 #include <string>
@@ -20,3 +23,5 @@ unsigned long DataHandler::get_dir(){
 	std::istringstream(linea) >> std::hex >> dir_dec;
 	return dir_dec;
 }
+
+#endif 

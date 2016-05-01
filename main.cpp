@@ -1,9 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stdlib.h>
 #include <iostream>
 #include <string>
 #include "CacheMemory.h"
+#include "CacheMemory.cpp"  // COMENTAR
 #include "DataHandler.h"
+#include "DataHandler.cpp" // COMENTAR
 
 using namespace std;
 
@@ -46,9 +49,9 @@ bool checkArg(int argc, char* argv[], int parametros[]){
 			 << endl;
 		return false;
 	}
-	parametros[0]= std::stoi(argv[1]);
-	parametros[1]= std::stoi(argv[2]);
-	parametros[2]= std::stoi(argv[3]);
+	parametros[0]= atoi(argv[1]);
+	parametros[1]= atoi(argv[2]);
+	parametros[2]= atoi(argv[3]);
 	return true;
 
 }

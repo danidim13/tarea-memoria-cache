@@ -1,4 +1,6 @@
 #include "CacheMemory.h"
+#include "DataHandler.h"
+#include "DataHandler.cpp"  // COMENTAR
 #include <sstream>
 #include <cmath>
 #include <iostream>
@@ -36,11 +38,16 @@ void CacheMemory::initialize(){
 	index_size = (int) log2(set_num);
 	tag_size = DIR_SIZE - (offset_size + index_size);
 
+	my_mask = 0;
 	for(int im = 0; im < index_size; im++){
     my_mask <<= 1;
     my_mask |= 1;
   }
 
+	///////////////////// TEST /////////////////////
+	DataHandler DataHand;
+	address = DataHand.get_dir();
+	split(address);
 }
 
 void CacheMemory::set_block_size(const int &val){
@@ -81,7 +88,14 @@ const void CacheMemory::print(){
 		  << mem_size << " B, "
 		  << assoc << "-way associative, con bloques de "
 		  << block_size << " bytes.\n\n\t"
-		  << tag_size << " bits de tag, " << index_size << " bits de index." << std::endl;
+		  << tag_size << " bits de tag, " << index_size << " bits de index." << std::endl
+
+			///////////// TEST ///////////////////
+			<< offset_size << "bits de offset" << std::endl
+			<< "Direccion decimal " << address << std::endl
+			<< "TAG: " << tag << std::endl
+			<< "Mask:" << my_mask << std::endl
+			<< "INDEX: " << index << std::endl;
 }
 
 void CacheMemory::split(dir_t &address){
