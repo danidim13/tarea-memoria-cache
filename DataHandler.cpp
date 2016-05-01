@@ -1,6 +1,3 @@
-#ifndef DATAHANDLER_CPP
-#define DATAHANDLER_CPP
-
 #include "DataHandler.h"
 #include <iostream>
 #include <string>
@@ -24,4 +21,3 @@ unsigned long DataHandler::get_dir(){
 	return dir_dec;
 }
 
-#endif 
