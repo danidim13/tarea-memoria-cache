@@ -45,9 +45,9 @@ void CacheMemory::initialize(){
   }
 
 	///////////////////// TEST /////////////////////
-	DataHandler DataHand;
-	address = DataHand.get_dir();
-	split(address);
+	//DataHandler DataHand;
+	//address = DataHand.get_dir();
+	//split(address);
 }
 
 void CacheMemory::set_block_size(const int &val){
@@ -98,8 +98,19 @@ const void CacheMemory::print(){
 			<< "INDEX: " << index << std::endl;
 }
 
-void CacheMemory::split(dir_t &address){
-	tag_and_index = address >> offset_size;
+void CacheMemory::split(dir_t &addr){
+  address = addr;
+	tag_and_index = addr >> offset_size;
 	index = tag_and_index & my_mask;
 	tag = tag_and_index >> index_size;
 }
+
+/*
+bool CacheMemory::fetch(dir_t &address){
+  tag_and_index = address >> offset_size;
+	index = tag_and_index & my_mask;
+	tag = tag_and_index >> index_size;
+  bool hit;
+  hit = set_array[index].fetch(tag);
+  return hit;
+}*/

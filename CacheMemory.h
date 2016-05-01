@@ -16,6 +16,7 @@ class CacheMemory{
 		typedef unsigned long dir_t;
 
 		void split(dir_t&);
+		bool fetch(dir_t&);
 		/* La estrutura de datos para las posiciones de memoria del cache sera
 		   un arreglo de los sets, tal que el index del array es el mismo que el del set
 		   Luego cada set consiste en n cantidad de bloques de cache, cada uno incluye
@@ -42,7 +43,7 @@ class CacheMemory{
 		dir_t tag;
 		dir_t index;
 		dir_t tag_and_index;
-		dir_t my_mask; 
+		dir_t my_mask;
 
 		// Tamano de las direcciones de memoria
 		const static int DIR_SIZE = 32;
@@ -50,7 +51,7 @@ class CacheMemory{
 		void initialize();
 		const bool check_pow2(const int&);
 		void set_tag();
-		bool fetch(const dir_t&);
+		//bool fetch(const dir_t&);
 };
 
 

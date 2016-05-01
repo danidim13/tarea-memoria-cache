@@ -1,3 +1,6 @@
+#ifndef DATAH
+#define DATAH
+
 #include "DataHandler.h"
 #include <iostream>
 #include <string>
@@ -21,3 +24,4 @@ unsigned long DataHandler::get_dir(){
 	return dir_dec;
 }
 
+#endif

@@ -4,9 +4,9 @@
 #include <iostream>
 #include <string>
 #include "CacheMemory.h"
-#include "CacheMemory.cpp"  // COMENTAR
+#include "CacheMemory.cpp"
 #include "DataHandler.h"
-#include "DataHandler.cpp" // COMENTAR
+#include "DataHandler.cpp"
 
 using namespace std;
 
@@ -25,7 +25,25 @@ int main(int argc, char* argv[]){
 	CacheMemory memoria(parametros[0], parametros[1], parametros[2]);
 	memoria.print();
 
-	DataHandler datH;
+	ifstream datos("aligned.trace");
+	string linea;
+	unsigned long dir_dec;
+	int x;
+
+//	while ( getline (datos,linea) ) {
+	while ( x <= 10) {
+		//Obtiene una dirección (una línea del archivo)
+		getline(datos, linea);
+		//Deja solo la dirección y borra el resto
+		linea.erase(linea.begin()+8,linea.end());
+		//Convierte la dirección a decimal
+		std::istringstream(linea) >> std::hex >> dir_dec;
+		memoria.split(dir_dec);
+		memoria.print();
+		x = x+1;
+	}
+
+	//DataHandler datH;
 	//datH.get_dir();
 
 	cout << "fin del programa" << endl;
