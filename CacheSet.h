@@ -1,7 +1,9 @@
-#ifndef CACHEBLOCK_H
-#define CACHEBLOCK_H
+#ifndef CACHESET_H
+#define CACHESET_H
 
-struct CacheBlock{
+struct Block{
+	Block():m_valid(false),m_tag(0){};
+
 	//bool m_dirty;
 	bool m_valid;
 	unsigned long m_tag;
@@ -10,13 +12,27 @@ struct CacheBlock{
 
 class CacheSet{
 	public:
-		CacheBlock();
-		CacheBlock(const int& assoc);
-		
-		CacheSet *find(const unsigned long m_tag);
+		CacheSet();
+		CacheSet(const int assoc);
+		~CacheSet();
 
+		typedef unsigned long dir_t;
+		const int block_num;
+		
+		
+		// Busca un bloque con el tag, si lo encuentra
+		// devuelve true, de lo contrario devuelve false
+		// y lo agrega en la posicion blocks[fifo]
+		bool fetch(dir_t tag);
+		void print();
+		
 	private: 
-		CacheBlocks blocks[];
+		Block *blocks;
+		int fifo;
+
+		// Busca un bloque con el tag, devuelve
+		// un puntero vacío si no encuentra
+		Block *find(dir_t tag);
 };
 
 #endif
