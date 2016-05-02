@@ -1,5 +1,6 @@
 #include "CacheMemory.h"
 #include "CacheSet.h"
+#include "CacheSet.cpp"
 #include <sstream>
 #include <cmath>
 #include <iostream>
@@ -16,7 +17,7 @@ CacheMemory::CacheMemory(){
         set_num = 0;
 }
 
-CacheMemory::CacheMemory(const int &v_assoc, const int &v_mem_size, const int &v_block_size){
+CacheMemory::CacheMemory(const dir_t &v_assoc, const dir_t &v_mem_size, const dir_t &v_block_size){
 	//df
 	set_assoc(v_assoc);
 	set_mem_size(v_mem_size);
@@ -44,14 +45,9 @@ void CacheMemory::initialize(){
     my_mask <<= 1;
     my_mask |= 1;
   }
-
-	///////////////////// TEST /////////////////////
-	//DataHandler DataHand;
-	//address = DataHand.get_dir();
-	//split(address);
 }
 
-void CacheMemory::set_block_size(const int &val){
+void CacheMemory::set_block_size(const dir_t &val){
 	if (check_pow2(val))
 		block_size = val;
 	else {
@@ -60,7 +56,7 @@ void CacheMemory::set_block_size(const int &val){
 	}
 }
 
-void CacheMemory::set_mem_size(const int &val){
+void CacheMemory::set_mem_size(const dir_t &val){
 	if (check_pow2(val))
 		mem_size = val;
 	else{
@@ -69,7 +65,7 @@ void CacheMemory::set_mem_size(const int &val){
 	}
 }
 
-void CacheMemory::set_assoc(const int &val){
+void CacheMemory::set_assoc(const dir_t &val){
 	if (check_pow2(val))
 		assoc = val;
 	else{
@@ -78,7 +74,7 @@ void CacheMemory::set_assoc(const int &val){
 	}
 }
 
-const bool CacheMemory::check_pow2(const int &val){
+const bool CacheMemory::check_pow2(const dir_t &val){
 	if(val){
 		return (val & (val-1)) == 0;
 	}
@@ -89,15 +85,8 @@ const void CacheMemory::print(){
 		  << mem_size << " B, "
 		  << assoc << "-way associative, con bloques de "
 		  << block_size << " bytes.\n\n\t"
-		  << tag_size << " bits de tag, " << index_size << " bits de index." << std::endl
-
-			///////////// TEST ///////////////////
-			<< offset_size << "bits de offset" << std::endl
-			<< "Direccion decimal " << address << std::endl
-			<< "TAG: " << tag << std::endl
-			<< "Mask:" << my_mask << std::endl
-			<< "INDEX: " << index << std::endl;
-}
+		  << tag_size << " bits de tag, " << index_size << " bits de index." << std::endl;
+		}
 
 bool CacheMemory::fetch(const dir_t &addr){
   tag_and_index = addr >> offset_size;

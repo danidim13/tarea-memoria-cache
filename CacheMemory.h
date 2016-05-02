@@ -5,16 +5,16 @@
 
 class CacheMemory{
 	public:
-		CacheMemory();
-		CacheMemory(const int &v_assoc, const int &v_mem_size, const int &v_block_size);
-		~CacheMemory();
-		void set_block_size(const int&);
-		void set_assoc(const int&);
-		void set_mem_size(const int&);
-		const void print();
-
 		// Tipo de datos para las direcciones de memoria.
 		typedef unsigned long dir_t;
+
+		CacheMemory();
+		CacheMemory(const dir_t &v_assoc, const dir_t &v_mem_size, const dir_t &v_block_size);
+		~CacheMemory();
+		void set_block_size(const dir_t&);
+		void set_assoc(const dir_t&);
+		void set_mem_size(const dir_t&);
+		const void print();
 
 		bool fetch(const dir_t&);
 		/* La estrutura de datos para las posiciones de memoria del cache sera
@@ -25,19 +25,19 @@ class CacheMemory{
 
 		*/
 		std::vector< CacheSet > set_vec;
-
+		
 		bool read(const dir_t&);
 		bool write(const dir_t&);
 	private:
-		int block_size;
-		int assoc;
-		int mem_size;
+		dir_t block_size;
+		dir_t assoc;
+		dir_t mem_size;
 
 		int tag_size;
 		int index_size;
 		int offset_size;
-		int block_num;
-		int set_num;
+		dir_t block_num;
+		dir_t set_num;
 
 		dir_t address;
 		dir_t tag;
@@ -49,7 +49,7 @@ class CacheMemory{
 		const static int DIR_SIZE = 32;
 
 		void initialize();
-		const bool check_pow2(const int&);
+		const bool check_pow2(const dir_t&);
 		void set_tag();
 };
 
