@@ -1,6 +1,5 @@
 #include "CacheMemory.h"
 #include "CacheSet.h"
-#include "CacheSet.cpp"
 #include <sstream>
 #include <cmath>
 #include <iostream>

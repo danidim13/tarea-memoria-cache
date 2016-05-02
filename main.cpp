@@ -1,11 +1,10 @@
-#ifndef MAIN_H
-#define MAIN_H
 #include <stdlib.h>
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "CacheMemory.h"
-#include "CacheMemory.cpp"
+
 
 using namespace std;
 
@@ -87,4 +86,3 @@ bool checkArg(int argc, char* argv[], long long parametros[]){
 
 
 
-#endif
