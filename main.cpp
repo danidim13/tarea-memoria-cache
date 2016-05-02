@@ -10,14 +10,14 @@
 using namespace std;
 
 void welcome();
-bool checkArg(int, char*[], int[]);
+bool checkArg(int, char*[], long long[]);
 
 int main(int argc, char* argv[]){
 
 	welcome();
 
 	// Revision de argumentos, si hay errores el programa termina y retorna 1
-	int parametros[3];
+	long long parametros[3];
 	if(!checkArg(argc, argv, parametros))
 		return 1;
 
@@ -71,16 +71,16 @@ void welcome(){
 
 }
 
-bool checkArg(int argc, char* argv[], int parametros[]){
+bool checkArg(int argc, char* argv[], long long parametros[]){
 	if(argc != 4){
 		cerr << "Error de argumentos, uso:\n"
 			 << "\t " << argv[0] << " <asociatividad> <tamano del cache> <tamano del bloque>"
 			 << endl;
 		return false;
 	}
-	parametros[0]= atoi(argv[1]);
-	parametros[1]= atoi(argv[2]);
-	parametros[2]= atoi(argv[3]);
+	parametros[0]= atoll(argv[1]);
+	parametros[1]= atoll(argv[2]);
+	parametros[2]= atoll(argv[3]);
 	return true;
 
 }

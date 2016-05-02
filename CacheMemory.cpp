@@ -34,7 +34,7 @@ void CacheMemory::initialize(){
 	set_num = block_num/assoc;
 
 	// Se determinan los bits del offset
-	offset_size = (int) log2(block_num);
+	offset_size = (int) log2(block_size);
 	index_size = (int) log2(set_num);
 	tag_size = DIR_SIZE - (offset_size + index_size);
 
