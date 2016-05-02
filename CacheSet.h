@@ -14,12 +14,13 @@ struct Block{
 class CacheSet{
 	public:
 		CacheSet();
-		CacheSet(const int assoc);
+		CacheSet(int assoc);
+		CacheSet(const CacheSet& other); // Constructor por copia
 		~CacheSet();
+		
+		CacheSet& operator=(const CacheSet& rhs); // Asignacion
 
 		typedef unsigned long dir_t;
-		const int block_num;
-		
 		
 		// Busca un bloque con el tag, si lo encuentra
 		// devuelve true, de lo contrario devuelve false
@@ -30,6 +31,7 @@ class CacheSet{
 	private: 
 		Block *blocks;
 		int fifo;
+		int block_num;
 
 		// Busca un bloque con el tag, devuelve
 		// un puntero vacío si no encuentra

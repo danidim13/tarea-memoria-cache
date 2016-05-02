@@ -1,16 +1,57 @@
 #include "CacheSet.h"
 #include <iostream>
+//#define DEBUG 1
 
 CacheSet::CacheSet(): block_num(0), fifo(0), blocks(0){
+	#ifdef DEBUG
+	std::cout << "Constructor por defecto!" << std::endl;
+	#endif
 
 }
 
-CacheSet::CacheSet(const int assoc):block_num(assoc), fifo(0){
+CacheSet::CacheSet(int assoc):block_num(assoc), fifo(0){
 	blocks = new Block[assoc];
+	
+	#ifdef DEBUG
+	std::cout << "Constructor por associa!" << std::endl;
+	#endif
+}
+
+CacheSet::CacheSet(const CacheSet& other):block_num(other.block_num), fifo(other.fifo), blocks(0){
+	if(block_num){
+		blocks = new Block[block_num];
+		for(int i=0; i<block_num; i++){
+			blocks[i] = other.blocks[i];
+		}
+	}
+
+	#ifdef DEBUG
+	std::cout << "Constructor por copia!" << std::endl;
+	#endif
 }
 
 CacheSet::~CacheSet(){
 	delete[] blocks;
+	#ifdef DEBUG
+	std::cout << "Destructor por defecto!" << std::endl;
+	#endif
+}
+
+CacheSet& CacheSet::operator=(const CacheSet& rhs){
+	delete[] blocks;
+	blocks = 0;
+	block_num = rhs.block_num;
+	fifo = rhs.block_num;
+	if(block_num){
+		blocks = new Block[block_num];
+		for(int i=0; i<block_num; i++){
+			blocks[i] = rhs.blocks[i];
+		}
+	}
+	
+	#ifdef DEBUG
+	std::cout << "Assign operator!" << std::endl;
+	#endif
 }
 
 Block* CacheSet::find(dir_t tag){
@@ -36,6 +77,9 @@ bool CacheSet::fetch(dir_t tag){
 
 void CacheSet::print(){
 	std::cout << "\n";
+	if(!blocks)
+		std::cout << "Set vacio!" << std::endl;
+	
 	for(int i=0; i < block_num; i++){
 		std::cout << i << ": ";
 		if(blocks[i].m_valid){
