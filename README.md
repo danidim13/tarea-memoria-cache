@@ -1,6 +1,7 @@
 # tarea-memoria-cache
 Tarea Programada 1 para el curso
 IE0521 - Estructuras de Computadores Digitales II
+
 Desarrolado por Daniel Díaz y Gabriel Jiménez
 
 Implementación de una memoria caché para un procesador con direcciones de 32 bits.
@@ -12,6 +13,7 @@ $ make
 Si se desea realizar una compilación de cero:
 
 $ make clean
+
 $ make
 
 El resultado de la compilación es un binario "Tarea.out", para correr una simulación:
