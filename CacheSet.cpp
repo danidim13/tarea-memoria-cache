@@ -11,7 +11,7 @@ CacheSet::CacheSet(): block_num(0), fifo(0), blocks(0){
 
 CacheSet::CacheSet(int assoc):block_num(assoc), fifo(0){
 	blocks = new Block[assoc];
-	
+
 	#ifdef DEBUG
 	std::cout << "Constructor por associa!" << std::endl;
 	#endif
@@ -48,7 +48,7 @@ CacheSet& CacheSet::operator=(const CacheSet& rhs){
 			blocks[i] = rhs.blocks[i];
 		}
 	}
-	
+
 	#ifdef DEBUG
 	std::cout << "Assign operator!" << std::endl;
 	#endif
@@ -79,7 +79,7 @@ void CacheSet::print(){
 	std::cout << "\n";
 	if(!blocks)
 		std::cout << "Set vacio!" << std::endl;
-	
+
 	for(int i=0; i < block_num; i++){
 		std::cout << i << ": ";
 		if(blocks[i].m_valid){
@@ -91,5 +91,5 @@ void CacheSet::print(){
 		std::cout << "\n";
 	}
 	std::cout << std::endl;
-		
+
 }

@@ -3,10 +3,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "CacheMemory.h"
-#include "CacheMemory.cpp"
-#include "DataHandler.h"
-#include "DataHandler.cpp"
 
 using namespace std;
 
@@ -28,23 +26,28 @@ int main(int argc, char* argv[]){
 	ifstream datos("aligned.trace");
 	string linea;
 	unsigned long dir_dec;
-	int x;
+	bool hit_miss;
+	long long cont_total = 0;
+	long long cont_hits = 0;
 
-//	while ( getline (datos,linea) ) {
-	while ( x <= 10) {
+	while ( getline (datos,linea) ) {
+//	while ( cont_total <= 10) {
 		//Obtiene una dirección (una línea del archivo)
 		getline(datos, linea);
 		//Deja solo la dirección y borra el resto
 		linea.erase(linea.begin()+8,linea.end());
 		//Convierte la dirección a decimal
 		std::istringstream(linea) >> std::hex >> dir_dec;
-		memoria.split(dir_dec);
-		memoria.print();
-		x = x+1;
+		hit_miss = memoria.fetch(dir_dec);
+		if (hit_miss){
+			cont_hits = cont_hits + 1;
+		}
+		cont_total = cont_total + 1;
+		//memoria.print();
 	}
 
-	//DataHandler datH;
-	//datH.get_dir();
+	cout << "Hits: " << cont_hits << endl;
+	cout << "Total: " << cont_total << endl;
 
 	cout << "fin del programa" << endl;
 	return 0;

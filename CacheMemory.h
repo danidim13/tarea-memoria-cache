@@ -1,6 +1,7 @@
 #ifndef CACHEMEMORY_H
 #define CACHEMEMORY_H
-
+#include "CacheSet.h"
+#include <vector>
 
 class CacheMemory{
 	public:
@@ -15,8 +16,7 @@ class CacheMemory{
 		// Tipo de datos para las direcciones de memoria.
 		typedef unsigned long dir_t;
 
-		void split(dir_t&);
-		bool fetch(dir_t&);
+		bool fetch(const dir_t&);
 		/* La estrutura de datos para las posiciones de memoria del cache sera
 		   un arreglo de los sets, tal que el index del array es el mismo que el del set
 		   Luego cada set consiste en n cantidad de bloques de cache, cada uno incluye
@@ -24,7 +24,7 @@ class CacheMemory{
 		   Asi, el tipo de datos sera un std::array< CacheSet >
 
 		*/
-		// std::array< CacheSet >
+		std::vector< CacheSet > set_vec;
 
 		bool read(const dir_t&);
 		bool write(const dir_t&);
@@ -51,7 +51,6 @@ class CacheMemory{
 		void initialize();
 		const bool check_pow2(const int&);
 		void set_tag();
-		//bool fetch(const dir_t&);
 };
 
 

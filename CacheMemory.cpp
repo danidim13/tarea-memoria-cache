@@ -1,6 +1,5 @@
 #include "CacheMemory.h"
-#include "DataHandler.h"
-#include "DataHandler.cpp"  // COMENTAR
+#include "CacheSet.h"
 #include <sstream>
 #include <cmath>
 #include <iostream>
@@ -37,6 +36,8 @@ void CacheMemory::initialize(){
 	offset_size = (int) log2(block_num);
 	index_size = (int) log2(set_num);
 	tag_size = DIR_SIZE - (offset_size + index_size);
+
+	set_vec.resize(set_num, CacheSet(assoc));
 
 	my_mask = 0;
 	for(int im = 0; im < index_size; im++){
@@ -98,19 +99,11 @@ const void CacheMemory::print(){
 			<< "INDEX: " << index << std::endl;
 }
 
-void CacheMemory::split(dir_t &addr){
-  address = addr;
-	tag_and_index = addr >> offset_size;
-	index = tag_and_index & my_mask;
-	tag = tag_and_index >> index_size;
-}
-
-/*
-bool CacheMemory::fetch(dir_t &address){
-  tag_and_index = address >> offset_size;
+bool CacheMemory::fetch(const dir_t &addr){
+  tag_and_index = addr >> offset_size;
 	index = tag_and_index & my_mask;
 	tag = tag_and_index >> index_size;
   bool hit;
-  hit = set_array[index].fetch(tag);
+  hit = set_vec[index].fetch(tag);
   return hit;
-}*/
+}
